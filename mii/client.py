@@ -51,6 +51,15 @@ def create_channel(host, port):
                                                GRPC_MAX_MSG_SIZE)])
 
 
+class QueryResultFuture():
+    def __init__(self, asyncio_loop, coro):
+        self.asyncio_loop = asyncio_loop
+        self.coro = coro
+
+    def result(self):
+        return self.asyncio_loop.run_until_complete(self.coro)
+
+
 class MIIClient():
     """
     Client to send queries to a single endpoint.
@@ -73,10 +82,14 @@ class MIIClient():
             proto_response
         ) if "unpack_response_from_proto" in conversions else proto_response
 
-    def query(self, request_dict, **query_kwargs):
-        return self.asyncio_loop.run_until_complete(
+    def query_async(self, request_dict, **query_kwargs):
+        return QueryResultFuture(
+            self.asyncio_loop,
             self._request_async_response(request_dict,
                                          **query_kwargs))
+
+    def query(self, request_dict, **query_kwargs):
+        return self.query_async(request_dict, **query_kwargs).result()
 
     async def terminate_async(self):
         await self.stub.Terminate(
@@ -106,7 +119,13 @@ class MIITensorParallelClient():
                                                    **query_kwargs)))
 
         await responses[0]
-        return responses[0]
+        return responses[0].result()
+
+    def query_async(self, request_dict, **query_kwargs):
+        return QueryResultFuture(
+            self.asyncio_loop,
+            self._query_in_tensor_parallel(request_dict,
+                                           query_kwargs))
 
     def query(self, request_dict, **query_kwargs):
         """Query a local deployment:
@@ -121,11 +140,7 @@ class MIITensorParallelClient():
         Returns:
             response: Response of the model
         """
-        response = self.asyncio_loop.run_until_complete(
-            self._query_in_tensor_parallel(request_dict,
-                                           query_kwargs))
-        ret = response.result()
-        return ret
+        return self.query_async(request_dict, **query_kwargs).result()
 
     def terminate(self):
         """Terminates the deployment"""

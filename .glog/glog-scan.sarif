@@ -12,7 +12,7 @@
           "informationUri": "https://www.glog.ai",
           "rules": [
             {
-              "id": "glog-844564f5-4934-4623-a23d-1e504096e91b",
+              "id": "glog-c914c10e-d436-4c67-9d6b-44e07371206e",
               "help": {
                 "text": "",
                 "markdown": "## Description\n\nThe `shell=True` subprocess call security vulnerability in Python occurs when a Python script uses the `subprocess` module with `shell=True` to execute system commands. This can lead to arbitrary command execution if the command string that is passed is formed using user-supplied input. This is because `shell=True` allows shell injection, a form of command injection, where an attacker can execute arbitrary commands on the host operating system using a vulnerable application.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, avoid using `shell=True` in `subprocess` calls, especially when the command string is formed using user-supplied input. If you need to use `subprocess`, use it with a list of arguments instead of a string. This way, the arguments are passed directly to the program without going through the shell, thus preventing shell injection.\n\n## Source Code Fix Recommendation\n\nInstead of:\n\n```python\nimport subprocess\ncmd = \"ls \" + user_supplied_string\nsubprocess.call(cmd, shell=True)\n```\n\nDo:\n\n```python\nimport subprocess\ncmd = [\"ls\", user_supplied_string]\nsubprocess.call(cmd)\n```\n\nIn the fixed code, `subprocess.call` is used with a list of arguments instead of a string. This way, the arguments are passed directly to the program without going through the shell, thus preventing shell injection.\n\n## Library Dependencies\n\nThe code example requires the `subprocess` module, which is part of the Python Standard Library, so no additional library dependencies are needed.\n\n## References\n\n- [OWASP Command Injection](https://owasp.org/www-community/attacks/Command_Injection)\n- [CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')](https://cwe.mitre.org/data/definitions/78.html)"
@@ -24,7 +24,7 @@
               }
             },
             {
-              "id": "glog-0fce92dd-7ccd-455a-836a-ca687da033cd",
+              "id": "glog-72babece-f90a-4640-9b9c-16299baf5a65",
               "help": {
                 "text": "",
                 "markdown": "## Description\n\n\"Potential Unsafe Use of Temporary File/Directory\" vulnerability in Python refers to the insecure usage of temporary files or directories. This vulnerability can lead to several security risks such as race conditions, unauthorized file access, or information disclosure. In the provided code snippet, the path to a temporary directory is hardcoded, which can be exploited by an attacker to manipulate or read the data.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use secure methods for creating temporary files or directories. Python's `tempfile` module provides several functions to create temporary files and directories securely, which can help prevent unauthorized access.\n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the provided code snippet using the `tempfile` module:\n\n```python\nimport tempfile\n\n# Create a temporary directory using the tempfile module\nwith tempfile.TemporaryDirectory() as temp_dir:\n    MII_CACHE_PATH_DEFAULT = temp_dir\n```\n\nIn this code, `tempfile.TemporaryDirectory()` is used to create a secure temporary directory. The `with` statement ensures that the directory is deleted when it is no longer needed.\n\n## Library Dependencies\n\nThe code example requires the following Python standard library:\n\n- `tempfile`\n\n## References\n\n- [OWASP - Insecure Temporary File](https://owasp.org/www-community/vulnerabilities/Insecure_Temporary_File)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
@@ -36,7 +36,43 @@
               }
             },
             {
-              "id": "glog-67a55442-11ed-4eb5-ac1d-d304381c5266",
+              "id": "glog-3198de8a-4e4f-4309-8f80-fbd66df18ee8",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\n\"Potential Temp File/Directory Security Risk\" vulnerability in Python refers to the insecure usage of temporary files or directories. This vulnerability can be exploited by an attacker to perform unauthorized actions such as reading sensitive data, modifying file content, or even executing arbitrary code. This is often due to the insecure creation or usage of temporary files or directories, which can lead to race conditions, where an attacker can create a symbolic link to a file, leading to an overwrite of the file or directory.\n\nIn the provided code snippet, the `MII_MODEL_PATH_DEFAULT` is set to a directory in `/tmp`, which is a world-writable directory. This means any user can write to this directory, making it a potential security risk.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should:\n\n- Avoid using world-writable directories for storing sensitive data.\n- Use secure functions for creating temporary files or directories. Python's `tempfile` module provides such functions which create temporary files in the most secure manner possible.\n- Set appropriate permissions for files and directories to restrict unauthorized access.\n\n## Source Code Fix Recommendation\n\nYou can use the `tempfile` module to create a temporary directory securely:\n\n```python\nimport tempfile\n\nwith tempfile.TemporaryDirectory() as MII_MODEL_PATH_DEFAULT:\n    # Use 'MII_MODEL_PATH_DEFAULT' as the temporary directory\n```\n\nThis code creates a temporary directory which is only accessible by the current user and is deleted when the context is exited.\n\n## Library Dependencies\n\nThe code example requires the following Python standard library:\n\n- `tempfile`\n\n## References\n\n- [OWASP - Insecure Temporary File](https://owasp.org/www-community/vulnerabilities/Insecure_Temporary_File)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
+              },
+              "properties": {
+                "tags": [
+                  "B108"
+                ]
+              }
+            },
+            {
+              "id": "glog-b60e418d-a810-421c-a7a1-c9ae4f6c68b5",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe `shell=True` subprocess call security vulnerability in Python occurs when a Python script uses the `subprocess` module with `shell=True` to execute system commands. This can lead to arbitrary command execution if the command string that is passed is formed using user-supplied input. This is because `shell=True` allows shell injection, a form of command injection, where an attacker can execute arbitrary commands on the host operating system using a vulnerable application.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, avoid using `shell=True` in `subprocess` calls, especially when the command string is formed using user-supplied input. If you need to use `subprocess`, use it with a list of arguments instead of a string. This way, the arguments are passed directly to the program without going through the shell, thus preventing shell injection.\n\n## Source Code Fix Recommendation\n\nInstead of:\n\n```python\nimport subprocess\ncmd = \"ls \" + user_supplied_string\nsubprocess.call(cmd, shell=True)\n```\n\nDo:\n\n```python\nimport subprocess\ncmd = [\"ls\", user_supplied_string]\nsubprocess.call(cmd)\n```\n\nIn the fixed code, `subprocess.call` is used with a list of arguments instead of a string. This way, the arguments are passed directly to the program without going through the shell, thus preventing shell injection.\n\n## Library Dependencies\n\nThe code example requires the `subprocess` module, which is part of the Python Standard Library, so no additional library dependencies are needed.\n\n## References\n\n- [OWASP Command Injection](https://owasp.org/www-community/attacks/Command_Injection)\n- [CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')](https://cwe.mitre.org/data/definitions/78.html)"
+              },
+              "properties": {
+                "tags": [
+                  "B602"
+                ]
+              }
+            },
+            {
+              "id": "glog-758135d8-8bd2-4d6c-ab77-d5f7df16c9e4",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe `shell=True` subprocess call security vulnerability in Python occurs when a developer uses the `shell=True` argument in the `subprocess` module functions. This can lead to shell injection attacks if the subprocess call includes unsanitized user input. An attacker can execute arbitrary commands on the system with the privileges of the user running the Python script.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, avoid using `shell=True` in subprocess calls whenever possible. If you must use it, ensure that you properly sanitize any user input that is included in the subprocess call. \n\n## Source Code Fix Recommendation\n\nInstead of using `shell=True`, you can pass the command and its arguments as a list. Here's an example:\n\n```python\n# Vulnerable code\nimport subprocess\ncommand = \"ls -l\"\nsubprocess.check_output(command, shell=True)\n\n# Recommended fix\nimport subprocess\ncommand = [\"ls\", \"-l\"]\nsubprocess.check_output(command)\n```\n\nIn the fixed code, the command and its arguments are passed as a list to `subprocess.check_output()`. This prevents shell injection attacks because the command is executed directly without going through the shell.\n\n## Library Dependencies\n\nThe code example only requires the built-in `subprocess` module in Python. No additional library dependencies are needed.\n\n## OWASP and CWE Links\n\n- [OWASP Command Injection](https://owasp.org/www-community/attacks/Command_Injection)\n- [CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')](https://cwe.mitre.org/data/definitions/78.html)\n\nPlease note that the links provided are active and accessible to anonymous users at the time of writing this report."
+              },
+              "properties": {
+                "tags": [
+                  "B602"
+                ]
+              }
+            },
+            {
+              "id": "glog-168bdba8-3838-41f3-95a1-11012f7bf91a",
               "help": {
                 "text": "",
                 "markdown": "## Description\n\nThe `shell=True` subprocess call security vulnerability in Python occurs when a developer uses the `shell=True` argument in the `subprocess` module functions. This can lead to shell injection attacks if the subprocess call includes unsanitized user input. An attacker can execute arbitrary commands on the system with the privileges of the user running the Python script.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, avoid using `shell=True` in subprocess calls whenever possible. If you must use it, ensure that you properly sanitize any user input that is included in the subprocess call. \n\n## Source Code Fix Recommendation\n\nInstead of using `shell=True`, you can pass the command and its arguments as a list. Here's an example:\n\n```python\n# Vulnerable code\nimport subprocess\ncommand = \"ls -l\"\nsubprocess.check_output(command, shell=True)\n\n# Recommended fix\nimport subprocess\ncommand = [\"ls\", \"-l\"]\nsubprocess.check_output(command)\n```\n\nIn the fixed code, the command and its arguments are passed as a list to `subprocess.check_output()`. This prevents shell injection attacks because the command is executed directly without going through the shell.\n\n## Library Dependencies\n\nThe code example only requires the built-in `subprocess` module in Python. No additional library dependencies are needed.\n\n## OWASP and CWE Links\n\n- [OWASP Command Injection](https://owasp.org/www-community/attacks/Command_Injection)\n- [CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')](https://cwe.mitre.org/data/definitions/78.html)\n\nPlease note that the links provided are active and accessible to anonymous users at the time of writing this report."
@@ -59,7 +95,7 @@
       "language": "en-US",
       "results": [
         {
-          "ruleId": "glog-844564f5-4934-4623-a23d-1e504096e91b",
+          "ruleId": "glog-c914c10e-d436-4c67-9d6b-44e07371206e",
           "kind": "fail",
           "level": "error",
           "message": {
@@ -96,7 +132,7 @@
           }
         },
         {
-          "ruleId": "glog-0fce92dd-7ccd-455a-836a-ca687da033cd",
+          "ruleId": "glog-72babece-f90a-4640-9b9c-16299baf5a65",
           "kind": "fail",
           "level": "warning",
           "message": {
@@ -133,7 +169,81 @@
           }
         },
         {
-          "ruleId": "glog-67a55442-11ed-4eb5-ac1d-d304381c5266",
+          "ruleId": "glog-3198de8a-4e4f-4309-8f80-fbd66df18ee8",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential Temp File/Directory Security Risk"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mii/constants.py"
+                },
+                "region": {
+                  "startLine": 110,
+                  "startColumn": 26,
+                  "endLine": 110,
+                  "endColumn": 43,
+                  "snippet": {
+                    "text": "MII_MODEL_PATH_DEFAULT = \"/tmp/mii_models\"\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 109,
+                  "endLine": 111,
+                  "snippet": {
+                    "text": "\nMII_MODEL_PATH_DEFAULT = \"/tmp/mii_models\"\n\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        },
+        {
+          "ruleId": "glog-b60e418d-a810-421c-a7a1-c9ae4f6c68b5",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "\"Shell=True Subprocess Call Security Vulnerability Detected\""
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "setup.py"
+                },
+                "region": {
+                  "startLine": 26,
+                  "startColumn": 18,
+                  "endLine": 26,
+                  "endColumn": 85,
+                  "snippet": {
+                    "text": "        result = subprocess.Popen(f'type {cmd}', stdout=subprocess.PIPE, shell=True)\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 25,
+                  "endLine": 27,
+                  "snippet": {
+                    "text": "    else:\n        result = subprocess.Popen(f'type {cmd}', stdout=subprocess.PIPE, shell=True)\n        return result.wait() == 0\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "HIGH",
+            "issue_confidence": "HIGH"
+          }
+        },
+        {
+          "ruleId": "glog-758135d8-8bd2-4d6c-ab77-d5f7df16c9e4",
           "kind": "fail",
           "level": "error",
           "message": {
@@ -159,6 +269,43 @@
                   "endLine": 36,
                   "snippet": {
                     "text": "    try:\n        result = subprocess.check_output(git_hash_cmd, shell=True)\n        git_hash = result.decode('utf-8').strip()\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "HIGH",
+            "issue_confidence": "HIGH"
+          }
+        },
+        {
+          "ruleId": "glog-168bdba8-3838-41f3-95a1-11012f7bf91a",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "\"Shell=True Subprocess Call Security Vulnerability Detected\""
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "setup.py"
+                },
+                "region": {
+                  "startLine": 37,
+                  "startColumn": 18,
+                  "endLine": 37,
+                  "endColumn": 69,
+                  "snippet": {
+                    "text": "        result = subprocess.check_output(git_branch_cmd, shell=True)\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 36,
+                  "endLine": 38,
+                  "snippet": {
+                    "text": "        git_hash = result.decode('utf-8').strip()\n        result = subprocess.check_output(git_branch_cmd, shell=True)\n        git_branch = result.decode('utf-8').strip()\n"
                   }
                 }
               }

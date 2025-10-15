@@ -12,74 +12,866 @@
           "informationUri": "https://www.glog.ai",
           "rules": [
             {
-              "id": "glog-c914c10e-d436-4c67-9d6b-44e07371206e",
+              "id": "f8f85684-8f82-3ab0-878a-014c6edcfbf7",
+              "name": "resources.rules.return-not-in-function",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.return-not-in-function"
+              },
+              "fullDescription": {
+                "text": "`return` only makes sense inside a function"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
               "help": {
-                "text": "",
-                "markdown": "## Description\n\nThe `shell=True` subprocess call security vulnerability in Python occurs when a Python script uses the `subprocess` module with `shell=True` to execute system commands. This can lead to arbitrary command execution if the command string that is passed is formed using user-supplied input. This is because `shell=True` allows shell injection, a form of command injection, where an attacker can execute arbitrary commands on the host operating system using a vulnerable application.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, avoid using `shell=True` in `subprocess` calls, especially when the command string is formed using user-supplied input. If you need to use `subprocess`, use it with a list of arguments instead of a string. This way, the arguments are passed directly to the program without going through the shell, thus preventing shell injection.\n\n## Source Code Fix Recommendation\n\nInstead of:\n\n```python\nimport subprocess\ncmd = \"ls \" + user_supplied_string\nsubprocess.call(cmd, shell=True)\n```\n\nDo:\n\n```python\nimport subprocess\ncmd = [\"ls\", user_supplied_string]\nsubprocess.call(cmd)\n```\n\nIn the fixed code, `subprocess.call` is used with a list of arguments instead of a string. This way, the arguments are passed directly to the program without going through the shell, thus preventing shell injection.\n\n## Library Dependencies\n\nThe code example requires the `subprocess` module, which is part of the Python Standard Library, so no additional library dependencies are needed.\n\n## References\n\n- [OWASP Command Injection](https://owasp.org/www-community/attacks/Command_Injection)\n- [CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')](https://cwe.mitre.org/data/definitions/78.html)"
+                "text": "`return` only makes sense inside a function\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "`return` only makes sense inside a function\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>"
               },
               "properties": {
+                "precision": "very-high",
                 "tags": [
-                  "B602"
+                  "resources.rules.return-not-in-function"
                 ]
               }
             },
             {
-              "id": "glog-72babece-f90a-4640-9b9c-16299baf5a65",
+              "id": "1e956359-5423-39d6-9591-a0fbee7e2737",
+              "name": "resources.rules.missing-ratelimit",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.missing-ratelimit"
+              },
+              "fullDescription": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
               "help": {
-                "text": "",
-                "markdown": "## Description\n\n\"Potential Unsafe Use of Temporary File/Directory\" vulnerability in Python refers to the insecure usage of temporary files or directories. This vulnerability can lead to several security risks such as race conditions, unauthorized file access, or information disclosure. In the provided code snippet, the path to a temporary directory is hardcoded, which can be exploited by an attacker to manipulate or read the data.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use secure methods for creating temporary files or directories. Python's `tempfile` module provides several functions to create temporary files and directories securely, which can help prevent unauthorized access.\n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the provided code snippet using the `tempfile` module:\n\n```python\nimport tempfile\n\n# Create a temporary directory using the tempfile module\nwith tempfile.TemporaryDirectory() as temp_dir:\n    MII_CACHE_PATH_DEFAULT = temp_dir\n```\n\nIn this code, `tempfile.TemporaryDirectory()` is used to create a secure temporary directory. The `with` statement ensures that the directory is deleted when it is no longer needed.\n\n## Library Dependencies\n\nThe code example requires the following Python standard library:\n\n- `tempfile`\n\n## References\n\n- [OWASP - Insecure Temporary File](https://owasp.org/www-community/vulnerabilities/Insecure_Temporary_File)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
               },
               "properties": {
+                "precision": "very-high",
                 "tags": [
-                  "B108"
+                  "resources.rules.missing-ratelimit"
                 ]
               }
             },
             {
-              "id": "glog-3198de8a-4e4f-4309-8f80-fbd66df18ee8",
+              "id": "6b2bf28c-bf50-3d0a-842b-f2b84aa0247f",
+              "name": "resources.rules.missing-ratelimit",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.missing-ratelimit"
+              },
+              "fullDescription": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
               "help": {
-                "text": "",
-                "markdown": "## Description\n\n\"Potential Temp File/Directory Security Risk\" vulnerability in Python refers to the insecure usage of temporary files or directories. This vulnerability can be exploited by an attacker to perform unauthorized actions such as reading sensitive data, modifying file content, or even executing arbitrary code. This is often due to the insecure creation or usage of temporary files or directories, which can lead to race conditions, where an attacker can create a symbolic link to a file, leading to an overwrite of the file or directory.\n\nIn the provided code snippet, the `MII_MODEL_PATH_DEFAULT` is set to a directory in `/tmp`, which is a world-writable directory. This means any user can write to this directory, making it a potential security risk.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should:\n\n- Avoid using world-writable directories for storing sensitive data.\n- Use secure functions for creating temporary files or directories. Python's `tempfile` module provides such functions which create temporary files in the most secure manner possible.\n- Set appropriate permissions for files and directories to restrict unauthorized access.\n\n## Source Code Fix Recommendation\n\nYou can use the `tempfile` module to create a temporary directory securely:\n\n```python\nimport tempfile\n\nwith tempfile.TemporaryDirectory() as MII_MODEL_PATH_DEFAULT:\n    # Use 'MII_MODEL_PATH_DEFAULT' as the temporary directory\n```\n\nThis code creates a temporary directory which is only accessible by the current user and is deleted when the context is exited.\n\n## Library Dependencies\n\nThe code example requires the following Python standard library:\n\n- `tempfile`\n\n## References\n\n- [OWASP - Insecure Temporary File](https://owasp.org/www-community/vulnerabilities/Insecure_Temporary_File)\n- [CWE-377: Insecure Temporary File](https://cwe.mitre.org/data/definitions/377.html)"
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
               },
               "properties": {
+                "precision": "very-high",
                 "tags": [
-                  "B108"
+                  "resources.rules.missing-ratelimit"
                 ]
               }
             },
             {
-              "id": "glog-b60e418d-a810-421c-a7a1-c9ae4f6c68b5",
+              "id": "e4ec3e7a-3d6b-3749-8859-b145f0bfd249",
+              "name": "resources.rules.missing-ratelimit",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.missing-ratelimit"
+              },
+              "fullDescription": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
               "help": {
-                "text": "",
-                "markdown": "## Description\n\nThe `shell=True` subprocess call security vulnerability in Python occurs when a Python script uses the `subprocess` module with `shell=True` to execute system commands. This can lead to arbitrary command execution if the command string that is passed is formed using user-supplied input. This is because `shell=True` allows shell injection, a form of command injection, where an attacker can execute arbitrary commands on the host operating system using a vulnerable application.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, avoid using `shell=True` in `subprocess` calls, especially when the command string is formed using user-supplied input. If you need to use `subprocess`, use it with a list of arguments instead of a string. This way, the arguments are passed directly to the program without going through the shell, thus preventing shell injection.\n\n## Source Code Fix Recommendation\n\nInstead of:\n\n```python\nimport subprocess\ncmd = \"ls \" + user_supplied_string\nsubprocess.call(cmd, shell=True)\n```\n\nDo:\n\n```python\nimport subprocess\ncmd = [\"ls\", user_supplied_string]\nsubprocess.call(cmd)\n```\n\nIn the fixed code, `subprocess.call` is used with a list of arguments instead of a string. This way, the arguments are passed directly to the program without going through the shell, thus preventing shell injection.\n\n## Library Dependencies\n\nThe code example requires the `subprocess` module, which is part of the Python Standard Library, so no additional library dependencies are needed.\n\n## References\n\n- [OWASP Command Injection](https://owasp.org/www-community/attacks/Command_Injection)\n- [CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')](https://cwe.mitre.org/data/definitions/78.html)"
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
               },
               "properties": {
+                "precision": "very-high",
                 "tags": [
-                  "B602"
+                  "resources.rules.missing-ratelimit"
                 ]
               }
             },
             {
-              "id": "glog-758135d8-8bd2-4d6c-ab77-d5f7df16c9e4",
+              "id": "d89beb29-9f34-396d-9ada-a2bf19924ab9",
+              "name": "resources.rules.missing-ratelimit",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.missing-ratelimit"
+              },
+              "fullDescription": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
               "help": {
-                "text": "",
-                "markdown": "## Description\n\nThe `shell=True` subprocess call security vulnerability in Python occurs when a developer uses the `shell=True` argument in the `subprocess` module functions. This can lead to shell injection attacks if the subprocess call includes unsanitized user input. An attacker can execute arbitrary commands on the system with the privileges of the user running the Python script.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, avoid using `shell=True` in subprocess calls whenever possible. If you must use it, ensure that you properly sanitize any user input that is included in the subprocess call. \n\n## Source Code Fix Recommendation\n\nInstead of using `shell=True`, you can pass the command and its arguments as a list. Here's an example:\n\n```python\n# Vulnerable code\nimport subprocess\ncommand = \"ls -l\"\nsubprocess.check_output(command, shell=True)\n\n# Recommended fix\nimport subprocess\ncommand = [\"ls\", \"-l\"]\nsubprocess.check_output(command)\n```\n\nIn the fixed code, the command and its arguments are passed as a list to `subprocess.check_output()`. This prevents shell injection attacks because the command is executed directly without going through the shell.\n\n## Library Dependencies\n\nThe code example only requires the built-in `subprocess` module in Python. No additional library dependencies are needed.\n\n## OWASP and CWE Links\n\n- [OWASP Command Injection](https://owasp.org/www-community/attacks/Command_Injection)\n- [CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')](https://cwe.mitre.org/data/definitions/78.html)\n\nPlease note that the links provided are active and accessible to anonymous users at the time of writing this report."
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
               },
               "properties": {
+                "precision": "very-high",
                 "tags": [
-                  "B602"
+                  "resources.rules.missing-ratelimit"
                 ]
               }
             },
             {
-              "id": "glog-168bdba8-3838-41f3-95a1-11012f7bf91a",
+              "id": "df9e76b2-ee97-31e9-95f8-8c0bf21941ea",
+              "name": "resources.rules.missing-ratelimit",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.missing-ratelimit"
+              },
+              "fullDescription": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
               "help": {
-                "text": "",
-                "markdown": "## Description\n\nThe `shell=True` subprocess call security vulnerability in Python occurs when a developer uses the `shell=True` argument in the `subprocess` module functions. This can lead to shell injection attacks if the subprocess call includes unsanitized user input. An attacker can execute arbitrary commands on the system with the privileges of the user running the Python script.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, avoid using `shell=True` in subprocess calls whenever possible. If you must use it, ensure that you properly sanitize any user input that is included in the subprocess call. \n\n## Source Code Fix Recommendation\n\nInstead of using `shell=True`, you can pass the command and its arguments as a list. Here's an example:\n\n```python\n# Vulnerable code\nimport subprocess\ncommand = \"ls -l\"\nsubprocess.check_output(command, shell=True)\n\n# Recommended fix\nimport subprocess\ncommand = [\"ls\", \"-l\"]\nsubprocess.check_output(command)\n```\n\nIn the fixed code, the command and its arguments are passed as a list to `subprocess.check_output()`. This prevents shell injection attacks because the command is executed directly without going through the shell.\n\n## Library Dependencies\n\nThe code example only requires the built-in `subprocess` module in Python. No additional library dependencies are needed.\n\n## OWASP and CWE Links\n\n- [OWASP Command Injection](https://owasp.org/www-community/attacks/Command_Injection)\n- [CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')](https://cwe.mitre.org/data/definitions/78.html)\n\nPlease note that the links provided are active and accessible to anonymous users at the time of writing this report."
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
               },
               "properties": {
+                "precision": "very-high",
                 "tags": [
-                  "B602"
+                  "resources.rules.missing-ratelimit"
+                ]
+              }
+            },
+            {
+              "id": "b6e6c739-ae91-394f-978a-c868add7e955",
+              "name": "resources.rules.missing-ratelimit",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.missing-ratelimit"
+              },
+              "fullDescription": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "resources.rules.missing-ratelimit"
+                ]
+              }
+            },
+            {
+              "id": "699ec173-1ea8-380d-902f-433659f0acc4",
+              "name": "resources.rules.missing-ratelimit",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.missing-ratelimit"
+              },
+              "fullDescription": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "resources.rules.missing-ratelimit"
+                ]
+              }
+            },
+            {
+              "id": "423ba23f-fcb6-39f2-8b7e-195d5534b71a",
+              "name": "resources.rules.missing-ratelimit",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.missing-ratelimit"
+              },
+              "fullDescription": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "resources.rules.missing-ratelimit"
+                ]
+              }
+            },
+            {
+              "id": "d055d707-7d91-37cc-9fc7-e414c11242a4",
+              "name": "resources.rules.missing-ratelimit",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.missing-ratelimit"
+              },
+              "fullDescription": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "resources.rules.missing-ratelimit"
+                ]
+              }
+            },
+            {
+              "id": "fdc27505-a45c-33dd-a802-8c2b59c124bd",
+              "name": "resources.rules.missing-ratelimit",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.missing-ratelimit"
+              },
+              "fullDescription": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "resources.rules.missing-ratelimit"
+                ]
+              }
+            },
+            {
+              "id": "0cf5a581-847d-3f39-8acc-825f0f49c0ea",
+              "name": "resources.rules.missing-ratelimit",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.missing-ratelimit"
+              },
+              "fullDescription": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "resources.rules.missing-ratelimit"
+                ]
+              }
+            },
+            {
+              "id": "f1cf4fc9-e147-3d04-be6f-1438da8b8667",
+              "name": "resources.rules.missing-ratelimit",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.missing-ratelimit"
+              },
+              "fullDescription": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "resources.rules.missing-ratelimit"
+                ]
+              }
+            },
+            {
+              "id": "3f362774-8e44-38fd-8184-1f1f3cf276d1",
+              "name": "resources.rules.missing-ratelimit",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.missing-ratelimit"
+              },
+              "fullDescription": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "resources.rules.missing-ratelimit"
+                ]
+              }
+            },
+            {
+              "id": "7b1e5667-760c-364c-9a51-13e612e6495e",
+              "name": "resources.rules.missing-ratelimit",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.missing-ratelimit"
+              },
+              "fullDescription": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "resources.rules.missing-ratelimit"
+                ]
+              }
+            },
+            {
+              "id": "1a2a4dae-1cc3-3f89-b860-67873604fe14",
+              "name": "resources.rules.missing-ratelimit",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.missing-ratelimit"
+              },
+              "fullDescription": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "resources.rules.missing-ratelimit"
+                ]
+              }
+            },
+            {
+              "id": "7da3ef93-b5b9-35a8-b482-8a56e0370b16",
+              "name": "resources.rules.missing-ratelimit",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.missing-ratelimit"
+              },
+              "fullDescription": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "resources.rules.missing-ratelimit"
+                ]
+              }
+            },
+            {
+              "id": "1fbd7415-afa0-3e6b-b103-66166ac83ff1",
+              "name": "resources.rules.missing-ratelimit",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.missing-ratelimit"
+              },
+              "fullDescription": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "resources.rules.missing-ratelimit"
+                ]
+              }
+            },
+            {
+              "id": "b10c2b16-4a57-361d-b52e-96ddf8c8eb9f",
+              "name": "resources.rules.missing-ratelimit",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.missing-ratelimit"
+              },
+              "fullDescription": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "resources.rules.missing-ratelimit"
+                ]
+              }
+            },
+            {
+              "id": "ccc706b5-b751-376d-9719-7c7d552e2eef",
+              "name": "resources.rules.missing-ratelimit",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.missing-ratelimit"
+              },
+              "fullDescription": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "resources.rules.missing-ratelimit"
+                ]
+              }
+            },
+            {
+              "id": "7c605d11-dda3-3e22-9d80-69ca436782cc",
+              "name": "resources.rules.missing-ratelimit",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.missing-ratelimit"
+              },
+              "fullDescription": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "resources.rules.missing-ratelimit"
+                ]
+              }
+            },
+            {
+              "id": "46d55704-d3ea-3be6-b01d-55bd16c92272",
+              "name": "resources.rules.missing-ratelimit",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.missing-ratelimit"
+              },
+              "fullDescription": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "resources.rules.missing-ratelimit"
+                ]
+              }
+            },
+            {
+              "id": "2eee8059-e14a-39a4-81c3-3f84388405f4",
+              "name": "resources.rules.missing-ratelimit",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.missing-ratelimit"
+              },
+              "fullDescription": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "resources.rules.missing-ratelimit"
+                ]
+              }
+            },
+            {
+              "id": "787e965c-8825-3f17-9c43-cdd38053f4b7",
+              "name": "resources.rules.missing-ratelimit",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.missing-ratelimit"
+              },
+              "fullDescription": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "resources.rules.missing-ratelimit"
+                ]
+              }
+            },
+            {
+              "id": "e3503d40-3e30-3ee3-a50e-07b1907d3aa9",
+              "name": "resources.rules.missing-ratelimit",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.missing-ratelimit"
+              },
+              "fullDescription": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "resources.rules.missing-ratelimit"
+                ]
+              }
+            },
+            {
+              "id": "3339ed92-3e63-3c12-98e1-6cfb44d13b75",
+              "name": "resources.rules.missing-ratelimit",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.missing-ratelimit"
+              },
+              "fullDescription": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "resources.rules.missing-ratelimit"
+                ]
+              }
+            },
+            {
+              "id": "fea43a23-1f0d-301e-beb7-cfac3a5c5784",
+              "name": "resources.rules.missing-ratelimit",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.missing-ratelimit"
+              },
+              "fullDescription": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "resources.rules.missing-ratelimit"
+                ]
+              }
+            },
+            {
+              "id": "bd556230-2a4c-3bab-8c99-fe19b8b3b6d5",
+              "name": "resources.rules.missing-ratelimit",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.missing-ratelimit"
+              },
+              "fullDescription": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "resources.rules.missing-ratelimit"
+                ]
+              }
+            },
+            {
+              "id": "7c85cc18-e3f0-3a12-8084-c95ec3f7a1a0",
+              "name": "resources.rules.missing-ratelimit",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.missing-ratelimit"
+              },
+              "fullDescription": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "resources.rules.missing-ratelimit"
+                ]
+              }
+            },
+            {
+              "id": "01f6249f-4d2b-3af5-9126-c205420e54c1",
+              "name": "resources.rules.missing-ratelimit",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.missing-ratelimit"
+              },
+              "fullDescription": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "resources.rules.missing-ratelimit"
+                ]
+              }
+            },
+            {
+              "id": "9c63a4b2-02f6-3664-ab26-ec2edc172155",
+              "name": "resources.rules.arbitrary-sleep",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.arbitrary-sleep"
+              },
+              "fullDescription": {
+                "text": "time.sleep() call; did you mean to leave this in?"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "error"
+              },
+              "help": {
+                "text": "time.sleep() call; did you mean to leave this in?\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "time.sleep() call; did you mean to leave this in?\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>"
+              },
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "resources.rules.arbitrary-sleep"
+                ]
+              }
+            },
+            {
+              "id": "283bacab-c454-3a9e-b36a-d86331ba04fc",
+              "name": "resources.rules.insecure-subprocess-use",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.insecure-subprocess-use"
+              },
+              "fullDescription": {
+                "text": "The Python 'subprocess' module called with 'shell=True' may allow for shell injection"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "The Python 'subprocess' module called with 'shell=True' may allow for shell injection\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "The Python 'subprocess' module called with 'shell=True' may allow for shell injection\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>"
+              },
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "resources.rules.insecure-subprocess-use"
+                ]
+              }
+            },
+            {
+              "id": "c8280cb6-b51d-32da-b364-ec8fae871c9b",
+              "name": "resources.rules.dangerous-subprocess-use",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.dangerous-subprocess-use"
+              },
+              "fullDescription": {
+                "text": "Detected subprocess function '$FUNC' without a static string. If this data can be\ncontrolled by a malicious actor, it may be an instance of command injection.\nAudit the use of this call to ensure it is not controllable by an external resource.\nYou may consider using 'shlex.escape()'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "Detected subprocess function '$FUNC' without a static string. If this data can be\ncontrolled by a malicious actor, it may be an instance of command injection.\nAudit the use of this call to ensure it is not controllable by an external resource.\nYou may consider using 'shlex.escape()'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Detected subprocess function '$FUNC' without a static string. If this data can be\ncontrolled by a malicious actor, it may be an instance of command injection.\nAudit the use of this call to ensure it is not controllable by an external resource.\nYou may consider using 'shlex.escape()'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://stackoverflow.com/questions/3172470/actual-meaning-of-shell-true-in-subprocess](https://stackoverflow.com/questions/3172470/actual-meaning-of-shell-true-in-subprocess)\n - [https://docs.python.org/3/library/subprocess.html](https://docs.python.org/3/library/subprocess.html)\n - [https://docs.python.org/3/library/shlex.html](https://docs.python.org/3/library/shlex.html)\n"
+              },
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "resources.rules.dangerous-subprocess-use"
+                ]
+              }
+            },
+            {
+              "id": "c6ed2b85-7427-382e-9aad-986cc740d5d2",
+              "name": "resources.rules.open-never-closed",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.open-never-closed"
+              },
+              "fullDescription": {
+                "text": "file object opened without corresponding close"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "error"
+              },
+              "help": {
+                "text": "file object opened without corresponding close\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "file object opened without corresponding close\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>"
+              },
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "resources.rules.open-never-closed"
+                ]
+              }
+            },
+            {
+              "id": "5df491de-722d-37a8-9aa2-759970b991bc",
+              "name": "resources.rules.tempfile-without-flush",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.tempfile-without-flush"
+              },
+              "fullDescription": {
+                "text": "Using '$F.name' without '.flush()' or '.close()' may cause an error because the file may not exist when '$F.name' is used. Use '.flush()' or close the file before using '$F.name'."
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "error"
+              },
+              "help": {
+                "text": "Using '$F.name' without '.flush()' or '.close()' may cause an error because the file may not exist when '$F.name' is used. Use '.flush()' or close the file before using '$F.name'.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Using '$F.name' without '.flush()' or '.close()' may cause an error because the file may not exist when '$F.name' is used. Use '.flush()' or close the file before using '$F.name'.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>"
+              },
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "resources.rules.tempfile-without-flush"
+                ]
+              }
+            },
+            {
+              "id": "0ead1b02-aadc-3abc-871e-73785bc8c548",
+              "name": "resources.rules.insecure-subprocess-use",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.insecure-subprocess-use"
+              },
+              "fullDescription": {
+                "text": "The Python 'subprocess' module called with 'shell=True' may allow for shell injection"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "The Python 'subprocess' module called with 'shell=True' may allow for shell injection\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "The Python 'subprocess' module called with 'shell=True' may allow for shell injection\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>"
+              },
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "resources.rules.insecure-subprocess-use"
                 ]
               }
             }
@@ -95,165 +887,979 @@
       "language": "en-US",
       "results": [
         {
-          "ruleId": "glog-c914c10e-d436-4c67-9d6b-44e07371206e",
+          "ruleId": "f8f85684-8f82-3ab0-878a-014c6edcfbf7",
           "kind": "fail",
-          "level": "error",
+          "level": "warning",
           "message": {
-            "text": "\"Shell=True Subprocess Call Security Vulnerability Detected\""
+            "text": "`return` only makes sense inside a function"
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "setup.py"
+                  "uri": "mii/config.py",
+                  "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
-                  "startLine": 23,
-                  "startColumn": 18,
-                  "endLine": 23,
-                  "endColumn": 80,
+                  "startLine": 92,
+                  "startColumn": 49,
+                  "endLine": 92,
+                  "endColumn": 55,
                   "snippet": {
-                    "text": "        result = subprocess.Popen(f'{cmd}', stdout=subprocess.PIPE, shell=True)\n"
-                  }
-                },
-                "contextRegion": {
-                  "startLine": 22,
-                  "endLine": 24,
-                  "snippet": {
-                    "text": "    if sys.platform == \"win32\":\n        result = subprocess.Popen(f'{cmd}', stdout=subprocess.PIPE, shell=True)\n        return result.wait() == 1\n"
+                    "text": "        json_encoders = {torch.dtype: lambda x: str(x)}"
                   }
                 }
               }
             }
           ],
-          "properties": {
-            "issue_severity": "HIGH",
-            "issue_confidence": "HIGH"
-          }
+          "fingerprints": {
+            "matchBasedId/v1": "fe902daf17533338df972c9874904a85f8a90b0f2923c6ced2f16f759dc71aba6792660148fc4c22c3d91b26d67f30fae4481dc28a03d928a543feed9af8f5fc_0"
+          },
+          "properties": {}
         },
         {
-          "ruleId": "glog-72babece-f90a-4640-9b9c-16299baf5a65",
+          "ruleId": "1e956359-5423-39d6-9591-a0fbee7e2737",
           "kind": "fail",
           "level": "warning",
           "message": {
-            "text": "Potential Unsafe Use of Temporary File/Directory"
+            "text": "Function 'GeneratorReply' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "mii/constants.py"
+                  "uri": "mii/grpc_related/modelresponse_server.py",
+                  "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
-                  "startLine": 100,
-                  "startColumn": 26,
-                  "endLine": 100,
-                  "endColumn": 42,
+                  "startLine": 84,
+                  "startColumn": 5,
+                  "endLine": 85,
+                  "endColumn": 62,
                   "snippet": {
-                    "text": "MII_CACHE_PATH_DEFAULT = \"/tmp/mii_cache\"\n"
+                    "text": "    def GeneratorReply(self, request, context):\n        return self._run_inference(\"GeneratorReply\", request)"
                   }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "e4af40ad0ecbf9d688aa0c251981e095e6649fc515fdd15a96f43306ab128e0765715c82537758bf717640716f85dfe348d839c2efaaac5e37f10d2694813d00_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "6b2bf28c-bf50-3d0a-842b-f2b84aa0247f",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'Terminate' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mii/grpc_related/modelresponse_server.py",
+                  "uriBaseId": "%SRCROOT%"
                 },
-                "contextRegion": {
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 5,
+                  "endLine": 30,
+                  "endColumn": 58,
+                  "snippet": {
+                    "text": "    def Terminate(self, request, context):\n        self._stop_event.set()\n        return google_dot_protobuf_dot_empty__pb2.Empty()"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "5f78f5272ca1c8fe835f9fe5dfced9dcb61e6fee10ff7d67a765832019e8e489fe61cdf479ef8d04da3b076e9e2864beacc22b2074c9a543200ea2226a26e312_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "e4ec3e7a-3d6b-3749-8859-b145f0bfd249",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'Txt2ImgReply' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mii/grpc_related/modelresponse_server.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 87,
+                  "startColumn": 5,
+                  "endLine": 88,
+                  "endColumn": 60,
+                  "snippet": {
+                    "text": "    def Txt2ImgReply(self, request, context):\n        return self._run_inference(\"Txt2ImgReply\", request)"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "e0a1cf77374ee08770b01911500ad87736f1caa3ce08ac75575e3529a90988e5a5c568efea0a2b7800e891a3c3d873e50685b378b479b73ecc027a5d47adf776_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "d89beb29-9f34-396d-9ada-a2bf19924ab9",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'ClassificationReply' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mii/grpc_related/modelresponse_server.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 90,
+                  "startColumn": 5,
+                  "endLine": 91,
+                  "endColumn": 67,
+                  "snippet": {
+                    "text": "    def ClassificationReply(self, request, context):\n        return self._run_inference(\"ClassificationReply\", request)"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "6c1a1f41c4c774a85eedf6f1c79b603634bc15d93035026a7c3fcff12803b954a1217e209eef42477bf3974e9ba4b4bfb59da95a9566e771939185f16bf73c2b_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "df9e76b2-ee97-31e9-95f8-8c0bf21941ea",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'QuestionAndAnswerReply' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mii/grpc_related/modelresponse_server.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 93,
+                  "startColumn": 5,
+                  "endLine": 94,
+                  "endColumn": 70,
+                  "snippet": {
+                    "text": "    def QuestionAndAnswerReply(self, request, context):\n        return self._run_inference(\"QuestionAndAnswerReply\", request)"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "5053e582e4a2851d3a20daa3a84efc920de4d39b67361c1cb5c319fc1673ec4ab5ea30d27908735eace3bf4822331b63278bd6f30cb3778cfb54f1c1bc67d55d_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "b6e6c739-ae91-394f-978a-c868add7e955",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'TokenClassificationReply' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mii/grpc_related/modelresponse_server.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
                   "startLine": 99,
-                  "endLine": 101,
+                  "startColumn": 5,
+                  "endLine": 100,
+                  "endColumn": 72,
                   "snippet": {
-                    "text": "MII_CACHE_PATH = \"MII_CACHE_PATH\"\nMII_CACHE_PATH_DEFAULT = \"/tmp/mii_cache\"\n\n"
+                    "text": "    def TokenClassificationReply(self, request, context):\n        return self._run_inference(\"TokenClassificationReply\", request)"
                   }
                 }
               }
             }
           ],
-          "properties": {
-            "issue_severity": "MEDIUM",
-            "issue_confidence": "MEDIUM"
-          }
+          "fingerprints": {
+            "matchBasedId/v1": "d214eb75db0d8919a5a70d66431ddb29b9de5a66a41a8502b9c041a99440333405264e2f13c6b5f4bb5eaa1643fafc35afd62a21457a9efe3c77fe7add818f52_0"
+          },
+          "properties": {}
         },
         {
-          "ruleId": "glog-3198de8a-4e4f-4309-8f80-fbd66df18ee8",
+          "ruleId": "699ec173-1ea8-380d-902f-433659f0acc4",
           "kind": "fail",
           "level": "warning",
           "message": {
-            "text": "Potential Temp File/Directory Security Risk"
+            "text": "Function 'FillMaskReply' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "mii/constants.py"
+                  "uri": "mii/grpc_related/modelresponse_server.py",
+                  "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
-                  "startLine": 110,
-                  "startColumn": 26,
-                  "endLine": 110,
-                  "endColumn": 43,
+                  "startLine": 96,
+                  "startColumn": 5,
+                  "endLine": 97,
+                  "endColumn": 61,
                   "snippet": {
-                    "text": "MII_MODEL_PATH_DEFAULT = \"/tmp/mii_models\"\n"
-                  }
-                },
-                "contextRegion": {
-                  "startLine": 109,
-                  "endLine": 111,
-                  "snippet": {
-                    "text": "\nMII_MODEL_PATH_DEFAULT = \"/tmp/mii_models\"\n\n"
+                    "text": "    def FillMaskReply(self, request, context):\n        return self._run_inference(\"FillMaskReply\", request)"
                   }
                 }
               }
             }
           ],
-          "properties": {
-            "issue_severity": "MEDIUM",
-            "issue_confidence": "MEDIUM"
-          }
+          "fingerprints": {
+            "matchBasedId/v1": "f627eeaab322db15974d39aad6a46b347d142a423eb9458184ef4db51b8c4adbb6174b3d7a1d41331585c1acbc38b5cc06c2fbf2bf726a57fd25f01dc1f114ec_0"
+          },
+          "properties": {}
         },
         {
-          "ruleId": "glog-b60e418d-a810-421c-a7a1-c9ae4f6c68b5",
+          "ruleId": "423ba23f-fcb6-39f2-8b7e-195d5534b71a",
           "kind": "fail",
-          "level": "error",
+          "level": "warning",
           "message": {
-            "text": "\"Shell=True Subprocess Call Security Vulnerability Detected\""
+            "text": "Function 'ConversationalReply' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "setup.py"
+                  "uri": "mii/grpc_related/modelresponse_server.py",
+                  "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
-                  "startLine": 26,
-                  "startColumn": 18,
-                  "endLine": 26,
-                  "endColumn": 85,
+                  "startLine": 102,
+                  "startColumn": 5,
+                  "endLine": 103,
+                  "endColumn": 67,
                   "snippet": {
-                    "text": "        result = subprocess.Popen(f'type {cmd}', stdout=subprocess.PIPE, shell=True)\n"
-                  }
-                },
-                "contextRegion": {
-                  "startLine": 25,
-                  "endLine": 27,
-                  "snippet": {
-                    "text": "    else:\n        result = subprocess.Popen(f'type {cmd}', stdout=subprocess.PIPE, shell=True)\n        return result.wait() == 0\n"
+                    "text": "    def ConversationalReply(self, request, context):\n        return self._run_inference(\"ConversationalReply\", request)"
                   }
                 }
               }
             }
           ],
-          "properties": {
-            "issue_severity": "HIGH",
-            "issue_confidence": "HIGH"
-          }
+          "fingerprints": {
+            "matchBasedId/v1": "efa30aa1e389f36c6500da9620b63c5c57897cb821fa32395442346a6203ed40792ab09824512dc1eb6510253abe7416ac051fe6faa85f7c2bfdeb27c8a9e6fc_0"
+          },
+          "properties": {}
         },
         {
-          "ruleId": "glog-758135d8-8bd2-4d6c-ab77-d5f7df16c9e4",
+          "ruleId": "d055d707-7d91-37cc-9fc7-e414c11242a4",
           "kind": "fail",
-          "level": "error",
+          "level": "warning",
           "message": {
-            "text": "\"Shell=True Subprocess Call Security Vulnerability Detected\""
+            "text": "Function 'GeneratorReply' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "setup.py"
+                  "uri": "mii/grpc_related/proto/modelresponse_pb2_grpc.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 68,
+                  "startColumn": 5,
+                  "endLine": 72,
+                  "endColumn": 61,
+                  "snippet": {
+                    "text": "    def GeneratorReply(self, request, context):\n        \"\"\"Missing associated documentation comment in .proto file.\"\"\"\n        context.set_code(grpc.StatusCode.UNIMPLEMENTED)\n        context.set_details('Method not implemented!')\n        raise NotImplementedError('Method not implemented!')"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "b1f10b6bc9a04fc9aad9b00b5bc2b8d3e94c7516e84b5d3f1084ed6cc8874fa5d7bbf15b1e028e5beecfe2192cf64d25b30260349d21f714884c911bb1abdc32_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "fdc27505-a45c-33dd-a802-8c2b59c124bd",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'Terminate' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mii/grpc_related/proto/modelresponse_pb2_grpc.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 62,
+                  "startColumn": 5,
+                  "endLine": 66,
+                  "endColumn": 61,
+                  "snippet": {
+                    "text": "    def Terminate(self, request, context):\n        \"\"\"Missing associated documentation comment in .proto file.\"\"\"\n        context.set_code(grpc.StatusCode.UNIMPLEMENTED)\n        context.set_details('Method not implemented!')\n        raise NotImplementedError('Method not implemented!')"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "04c726d3ab3e17ec29785db7487643b6f492658d564dd37567a7bda5f9079135b5bc128ecbe1cb3d322414ba962eaf24444458862cf5d729fbd07b6f6a4ff4d2_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "0cf5a581-847d-3f39-8acc-825f0f49c0ea",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'ClassificationReply' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mii/grpc_related/proto/modelresponse_pb2_grpc.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 74,
+                  "startColumn": 5,
+                  "endLine": 78,
+                  "endColumn": 61,
+                  "snippet": {
+                    "text": "    def ClassificationReply(self, request, context):\n        \"\"\"Missing associated documentation comment in .proto file.\"\"\"\n        context.set_code(grpc.StatusCode.UNIMPLEMENTED)\n        context.set_details('Method not implemented!')\n        raise NotImplementedError('Method not implemented!')"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "e082c721fbc2f27961e0625803dbde806f0b7a731bdfb4600d8d682b67ce3a3ed68224e9142a85124ddbb58a1259275f45b13b6d0ce9d9bd32603b7816448697_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "f1cf4fc9-e147-3d04-be6f-1438da8b8667",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'QuestionAndAnswerReply' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mii/grpc_related/proto/modelresponse_pb2_grpc.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 80,
+                  "startColumn": 5,
+                  "endLine": 84,
+                  "endColumn": 61,
+                  "snippet": {
+                    "text": "    def QuestionAndAnswerReply(self, request, context):\n        \"\"\"Missing associated documentation comment in .proto file.\"\"\"\n        context.set_code(grpc.StatusCode.UNIMPLEMENTED)\n        context.set_details('Method not implemented!')\n        raise NotImplementedError('Method not implemented!')"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "bd4500d253628e986fd2dabe5285b0d0b54bbbb24668cad941e4bd1199fb820bbff22076b5069ec7e26daf7ff98c905d8c83cd1dc7e67d5f8861d74bd544b67c_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "3f362774-8e44-38fd-8184-1f1f3cf276d1",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'FillMaskReply' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mii/grpc_related/proto/modelresponse_pb2_grpc.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 86,
+                  "startColumn": 5,
+                  "endLine": 90,
+                  "endColumn": 61,
+                  "snippet": {
+                    "text": "    def FillMaskReply(self, request, context):\n        \"\"\"Missing associated documentation comment in .proto file.\"\"\"\n        context.set_code(grpc.StatusCode.UNIMPLEMENTED)\n        context.set_details('Method not implemented!')\n        raise NotImplementedError('Method not implemented!')"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "1a93a8b0a39b78abb19ecbc6c1d73b0a6f147b6b954035b4303aa07f98a14186f7dd8590e1c07f1636b49583765cf7517a09eca3611ac436f3afc08f61f4ee23_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "7b1e5667-760c-364c-9a51-13e612e6495e",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'ConversationalReply' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mii/grpc_related/proto/modelresponse_pb2_grpc.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 98,
+                  "startColumn": 5,
+                  "endLine": 102,
+                  "endColumn": 61,
+                  "snippet": {
+                    "text": "    def ConversationalReply(self, request, context):\n        \"\"\"Missing associated documentation comment in .proto file.\"\"\"\n        context.set_code(grpc.StatusCode.UNIMPLEMENTED)\n        context.set_details('Method not implemented!')\n        raise NotImplementedError('Method not implemented!')"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "61f17fda76ec55243381606e1824ae9c2d799e8595761841f3100bfcf6da741ea6654a89f658120d3b582d16649a1064c1114ffda41d9fdd3aefce7df31a8756_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "1a2a4dae-1cc3-3f89-b860-67873604fe14",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'Terminate' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mii/grpc_related/proto/modelresponse_pb2_grpc.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 171,
+                  "startColumn": 6,
+                  "endLine": 195,
+                  "endColumn": 22,
+                  "snippet": {
+                    "text": "    @staticmethod\n    def Terminate(request,\n                  target,\n                  options=(),\n                  channel_credentials=None,\n                  call_credentials=None,\n                  insecure=False,\n                  compression=None,\n                  wait_for_ready=None,\n                  timeout=None,\n                  metadata=None):\n        return grpc.experimental.unary_unary(\n            request,\n            target,\n            '/modelresponse.ModelResponse/Terminate',\n            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,\n            google_dot_protobuf_dot_empty__pb2.Empty.FromString,\n            options,\n            channel_credentials,\n            insecure,\n            call_credentials,\n            compression,\n            wait_for_ready,\n            timeout,\n            metadata)"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "04c726d3ab3e17ec29785db7487643b6f492658d564dd37567a7bda5f9079135b5bc128ecbe1cb3d322414ba962eaf24444458862cf5d729fbd07b6f6a4ff4d2_1"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "7da3ef93-b5b9-35a8-b482-8a56e0370b16",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'Txt2ImgReply' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mii/grpc_related/proto/modelresponse_pb2_grpc.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 104,
+                  "startColumn": 5,
+                  "endLine": 108,
+                  "endColumn": 61,
+                  "snippet": {
+                    "text": "    def Txt2ImgReply(self, request, context):\n        \"\"\"Missing associated documentation comment in .proto file.\"\"\"\n        context.set_code(grpc.StatusCode.UNIMPLEMENTED)\n        context.set_details('Method not implemented!')\n        raise NotImplementedError('Method not implemented!')"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "1dbf4e51662302fb50d1e74e5831831d48512aecab489b03eee8df93b9371bea0481c2b68b4d1a21e47b86d3996f19738cd2592d3dd0c89e87bad249a26b5515_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "1fbd7415-afa0-3e6b-b103-66166ac83ff1",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'TokenClassificationReply' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mii/grpc_related/proto/modelresponse_pb2_grpc.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 92,
+                  "startColumn": 5,
+                  "endLine": 96,
+                  "endColumn": 61,
+                  "snippet": {
+                    "text": "    def TokenClassificationReply(self, request, context):\n        \"\"\"Missing associated documentation comment in .proto file.\"\"\"\n        context.set_code(grpc.StatusCode.UNIMPLEMENTED)\n        context.set_details('Method not implemented!')\n        raise NotImplementedError('Method not implemented!')"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "eaca01c8b6e16fc49869092a57584cab80b7c049fc0bbe131f61e0eaabc70f6f5836a3e61efbd5953841229c7b5c736bccea2f0c1783577b442104021e71dad1_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "b10c2b16-4a57-361d-b52e-96ddf8c8eb9f",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'GeneratorReply' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mii/grpc_related/proto/modelresponse_pb2_grpc.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 197,
+                  "startColumn": 6,
+                  "endLine": 221,
+                  "endColumn": 22,
+                  "snippet": {
+                    "text": "    @staticmethod\n    def GeneratorReply(request,\n                       target,\n                       options=(),\n                       channel_credentials=None,\n                       call_credentials=None,\n                       insecure=False,\n                       compression=None,\n                       wait_for_ready=None,\n                       timeout=None,\n                       metadata=None):\n        return grpc.experimental.unary_unary(\n            request,\n            target,\n            '/modelresponse.ModelResponse/GeneratorReply',\n            modelresponse__pb2.MultiStringRequest.SerializeToString,\n            modelresponse__pb2.MultiStringReply.FromString,\n            options,\n            channel_credentials,\n            insecure,\n            call_credentials,\n            compression,\n            wait_for_ready,\n            timeout,\n            metadata)"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "b1f10b6bc9a04fc9aad9b00b5bc2b8d3e94c7516e84b5d3f1084ed6cc8874fa5d7bbf15b1e028e5beecfe2192cf64d25b30260349d21f714884c911bb1abdc32_1"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "7c605d11-dda3-3e22-9d80-69ca436782cc",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'QuestionAndAnswerReply' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mii/grpc_related/proto/modelresponse_pb2_grpc.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 249,
+                  "startColumn": 6,
+                  "endLine": 273,
+                  "endColumn": 22,
+                  "snippet": {
+                    "text": "    @staticmethod\n    def QuestionAndAnswerReply(request,\n                               target,\n                               options=(),\n                               channel_credentials=None,\n                               call_credentials=None,\n                               insecure=False,\n                               compression=None,\n                               wait_for_ready=None,\n                               timeout=None,\n                               metadata=None):\n        return grpc.experimental.unary_unary(\n            request,\n            target,\n            '/modelresponse.ModelResponse/QuestionAndAnswerReply',\n            modelresponse__pb2.QARequest.SerializeToString,\n            modelresponse__pb2.SingleStringReply.FromString,\n            options,\n            channel_credentials,\n            insecure,\n            call_credentials,\n            compression,\n            wait_for_ready,\n            timeout,\n            metadata)"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "bd4500d253628e986fd2dabe5285b0d0b54bbbb24668cad941e4bd1199fb820bbff22076b5069ec7e26daf7ff98c905d8c83cd1dc7e67d5f8861d74bd544b67c_1"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "ccc706b5-b751-376d-9719-7c7d552e2eef",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'ClassificationReply' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mii/grpc_related/proto/modelresponse_pb2_grpc.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 223,
+                  "startColumn": 6,
+                  "endLine": 247,
+                  "endColumn": 22,
+                  "snippet": {
+                    "text": "    @staticmethod\n    def ClassificationReply(request,\n                            target,\n                            options=(),\n                            channel_credentials=None,\n                            call_credentials=None,\n                            insecure=False,\n                            compression=None,\n                            wait_for_ready=None,\n                            timeout=None,\n                            metadata=None):\n        return grpc.experimental.unary_unary(\n            request,\n            target,\n            '/modelresponse.ModelResponse/ClassificationReply',\n            modelresponse__pb2.SingleStringRequest.SerializeToString,\n            modelresponse__pb2.SingleStringReply.FromString,\n            options,\n            channel_credentials,\n            insecure,\n            call_credentials,\n            compression,\n            wait_for_ready,\n            timeout,\n            metadata)"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "e082c721fbc2f27961e0625803dbde806f0b7a731bdfb4600d8d682b67ce3a3ed68224e9142a85124ddbb58a1259275f45b13b6d0ce9d9bd32603b7816448697_1"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "46d55704-d3ea-3be6-b01d-55bd16c92272",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'FillMaskReply' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mii/grpc_related/proto/modelresponse_pb2_grpc.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 275,
+                  "startColumn": 6,
+                  "endLine": 299,
+                  "endColumn": 22,
+                  "snippet": {
+                    "text": "    @staticmethod\n    def FillMaskReply(request,\n                      target,\n                      options=(),\n                      channel_credentials=None,\n                      call_credentials=None,\n                      insecure=False,\n                      compression=None,\n                      wait_for_ready=None,\n                      timeout=None,\n                      metadata=None):\n        return grpc.experimental.unary_unary(\n            request,\n            target,\n            '/modelresponse.ModelResponse/FillMaskReply',\n            modelresponse__pb2.SingleStringRequest.SerializeToString,\n            modelresponse__pb2.SingleStringReply.FromString,\n            options,\n            channel_credentials,\n            insecure,\n            call_credentials,\n            compression,\n            wait_for_ready,\n            timeout,\n            metadata)"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "1a93a8b0a39b78abb19ecbc6c1d73b0a6f147b6b954035b4303aa07f98a14186f7dd8590e1c07f1636b49583765cf7517a09eca3611ac436f3afc08f61f4ee23_1"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "2eee8059-e14a-39a4-81c3-3f84388405f4",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'TokenClassificationReply' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mii/grpc_related/proto/modelresponse_pb2_grpc.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 301,
+                  "startColumn": 6,
+                  "endLine": 325,
+                  "endColumn": 22,
+                  "snippet": {
+                    "text": "    @staticmethod\n    def TokenClassificationReply(request,\n                                 target,\n                                 options=(),\n                                 channel_credentials=None,\n                                 call_credentials=None,\n                                 insecure=False,\n                                 compression=None,\n                                 wait_for_ready=None,\n                                 timeout=None,\n                                 metadata=None):\n        return grpc.experimental.unary_unary(\n            request,\n            target,\n            '/modelresponse.ModelResponse/TokenClassificationReply',\n            modelresponse__pb2.SingleStringRequest.SerializeToString,\n            modelresponse__pb2.SingleStringReply.FromString,\n            options,\n            channel_credentials,\n            insecure,\n            call_credentials,\n            compression,\n            wait_for_ready,\n            timeout,\n            metadata)"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "eaca01c8b6e16fc49869092a57584cab80b7c049fc0bbe131f61e0eaabc70f6f5836a3e61efbd5953841229c7b5c736bccea2f0c1783577b442104021e71dad1_1"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "787e965c-8825-3f17-9c43-cdd38053f4b7",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'ConversationalReply' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mii/grpc_related/proto/modelresponse_pb2_grpc.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 327,
+                  "startColumn": 6,
+                  "endLine": 351,
+                  "endColumn": 22,
+                  "snippet": {
+                    "text": "    @staticmethod\n    def ConversationalReply(request,\n                            target,\n                            options=(),\n                            channel_credentials=None,\n                            call_credentials=None,\n                            insecure=False,\n                            compression=None,\n                            wait_for_ready=None,\n                            timeout=None,\n                            metadata=None):\n        return grpc.experimental.unary_unary(\n            request,\n            target,\n            '/modelresponse.ModelResponse/ConversationalReply',\n            modelresponse__pb2.ConversationRequest.SerializeToString,\n            modelresponse__pb2.ConversationReply.FromString,\n            options,\n            channel_credentials,\n            insecure,\n            call_credentials,\n            compression,\n            wait_for_ready,\n            timeout,\n            metadata)"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "61f17fda76ec55243381606e1824ae9c2d799e8595761841f3100bfcf6da741ea6654a89f658120d3b582d16649a1064c1114ffda41d9fdd3aefce7df31a8756_1"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "e3503d40-3e30-3ee3-a50e-07b1907d3aa9",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'Txt2ImgReply' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mii/grpc_related/proto/modelresponse_pb2_grpc.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 353,
+                  "startColumn": 6,
+                  "endLine": 377,
+                  "endColumn": 22,
+                  "snippet": {
+                    "text": "    @staticmethod\n    def Txt2ImgReply(request,\n                     target,\n                     options=(),\n                     channel_credentials=None,\n                     call_credentials=None,\n                     insecure=False,\n                     compression=None,\n                     wait_for_ready=None,\n                     timeout=None,\n                     metadata=None):\n        return grpc.experimental.unary_unary(\n            request,\n            target,\n            '/modelresponse.ModelResponse/Txt2ImgReply',\n            modelresponse__pb2.MultiStringRequest.SerializeToString,\n            modelresponse__pb2.ImageReply.FromString,\n            options,\n            channel_credentials,\n            insecure,\n            call_credentials,\n            compression,\n            wait_for_ready,\n            timeout,\n            metadata)"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "1dbf4e51662302fb50d1e74e5831831d48512aecab489b03eee8df93b9371bea0481c2b68b4d1a21e47b86d3996f19738cd2592d3dd0c89e87bad249a26b5515_1"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "3339ed92-3e63-3c12-98e1-6cfb44d13b75",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'proto_request_to_single_input' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mii/method_table.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 1,
+                  "endLine": 31,
+                  "endColumn": 24,
+                  "snippet": {
+                    "text": "def proto_request_to_single_input(request):\n    args = (request.request, )\n    kwargs = unpack_proto_query_kwargs(request.query_kwargs)\n    return args, kwargs"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "0fa61f75a88927f729c14c250f677628400cf3b9cd068d8eab056fe89984ac77b53596a35e807ef9793f1864937c2c316711e4dc27879f4ca149db8f1792fbda_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "fea43a23-1f0d-301e-beb7-cfac3a5c5784",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'proto_request_to_list' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mii/method_table.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 34,
+                  "startColumn": 1,
+                  "endLine": 37,
+                  "endColumn": 24,
+                  "snippet": {
+                    "text": "def proto_request_to_list(request):\n    args = ([r for r in request.request], )\n    kwargs = unpack_proto_query_kwargs(request.query_kwargs)\n    return args, kwargs"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "99fb5e4c5f95e50c9c5f79a1cf43b59f99524ef9ce33f7453454aaecc213771a13d451dcc34e58996c356b1a169d19a8d35339de962302024430588783155c92_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "bd556230-2a4c-3bab-8c99-fe19b8b3b6d5",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'conversational_unpack_request_from_proto' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mii/method_table.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 75,
+                  "startColumn": 1,
+                  "endLine": 84,
+                  "endColumn": 24,
+                  "snippet": {
+                    "text": "def conversational_unpack_request_from_proto(request):\n    kwargs = unpack_proto_query_kwargs(request.query_kwargs)\n    conv = Conversation(text=request.text,\n                        conversation_id=request.conversation_id,\n                        past_user_inputs=request.past_user_inputs,\n                        generated_responses=request.generated_responses,\n                        **kwargs)\n    args = (conv, )\n    kwargs = {}\n    return args, kwargs"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "ec7ee9332d5893debffd46555a6d5a33e156dc2bd3c67fd4f220b7eac4fb121834dd5b779118bb21520caf709e77470bc8614e564a0fd608e277bc2fcfaf7197_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "7c85cc18-e3f0-3a12-8084-c95ec3f7a1a0",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'question_answering_unpack_request_from_proto' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mii/method_table.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 51,
+                  "startColumn": 1,
+                  "endLine": 56,
+                  "endColumn": 24,
+                  "snippet": {
+                    "text": "def question_answering_unpack_request_from_proto(request):\n    kwargs = unpack_proto_query_kwargs(request.query_kwargs)\n    kwargs[\"question\"] = request.question\n    kwargs[\"context\"] = request.context\n    args = ()\n    return args, kwargs"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "ad705b588b3b0bddf5a2142736da2b8b41bf46b9c873201c86164b676d2b1cc28e8a01c939f0d9442f13c2618fe3f4f6725310a93135b7c528ee693466c5dbbb_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "01f6249f-4d2b-3af5-9126-c205420e54c1",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'run' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mii/models/score/score_template.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 43,
+                  "startColumn": 1,
+                  "endLine": 57,
+                  "endColumn": 67,
+                  "snippet": {
+                    "text": "def run(request):\n    global model\n    assert model is not None, \"grpc client has not been setup when this model was created\"\n\n    request_dict = json.loads(request)\n\n    query_dict = mii.utils.extract_query_dict(configs[mii.constants.TASK_NAME_KEY],\n                                              request_dict)\n\n    response = model.query(query_dict, **request_dict)\n\n    time_taken = response.time_taken\n    if not isinstance(response.response, str):\n        response = [r for r in response.response]\n    return json.dumps({'responses': response, 'time': time_taken})"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "6f139dca8cad47711079e05dec660480fb1fe19942da6600edab40fc9ce14072215621bf7edb1e9d12a9a7d618a2eb627c74ef0cb3221e0da4f25f9d6e07f2ce_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "9c63a4b2-02f6-3664-ab26-ec2edc172155",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "time.sleep() call; did you mean to leave this in?"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mii/server.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 78,
+                  "startColumn": 17,
+                  "endLine": 78,
+                  "endColumn": 30,
+                  "snippet": {
+                    "text": "                time.sleep(4)"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "0a052a851f2e8b9fea29bff8b4feaf0c28d8d21ef10b43b84e1153b605353dfe3dc49bc5f96f40e5ae035d449a9bcaf5db2933d9db82df74eb65bfec05a70df2_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "283bacab-c454-3a9e-b36a-d86331ba04fc",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "The Python 'subprocess' module called with 'shell=True' may allow for shell injection"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "setup.py",
+                  "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
                   "startLine": 35,
@@ -261,36 +1867,123 @@
                   "endLine": 35,
                   "endColumn": 67,
                   "snippet": {
-                    "text": "        result = subprocess.check_output(git_hash_cmd, shell=True)\n"
-                  }
-                },
-                "contextRegion": {
-                  "startLine": 34,
-                  "endLine": 36,
-                  "snippet": {
-                    "text": "    try:\n        result = subprocess.check_output(git_hash_cmd, shell=True)\n        git_hash = result.decode('utf-8').strip()\n"
+                    "text": "        result = subprocess.check_output(git_hash_cmd, shell=True)"
                   }
                 }
               }
             }
           ],
-          "properties": {
-            "issue_severity": "HIGH",
-            "issue_confidence": "HIGH"
-          }
+          "fingerprints": {
+            "matchBasedId/v1": "f5e971709f9442762ccfc2606601feb2c1979fccb9deb3cf64fcee70fde4f993cb8856832871ecfe450c77b6c2d1602b6994e60653b2b0b271dee4fcdb1fcf94_0"
+          },
+          "properties": {}
         },
         {
-          "ruleId": "glog-168bdba8-3838-41f3-95a1-11012f7bf91a",
+          "ruleId": "c8280cb6-b51d-32da-b364-ec8fae871c9b",
           "kind": "fail",
-          "level": "error",
+          "level": "warning",
           "message": {
-            "text": "\"Shell=True Subprocess Call Security Vulnerability Detected\""
+            "text": "Detected subprocess function 'Popen' without a static string. If this data can be\ncontrolled by a malicious actor, it may be an instance of command injection.\nAudit the use of this call to ensure it is not controllable by an external resource.\nYou may consider using 'shlex.escape()'.\n"
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "setup.py"
+                  "uri": "mii/server.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 239,
+                  "startColumn": 16,
+                  "endLine": 239,
+                  "endColumn": 50,
+                  "snippet": {
+                    "text": "        return subprocess.Popen(cmd, env=mii_env)"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "96f4183c59eafa5ee9fcda9c4c9112301b815e83be7e4abe4fd291c1ebda29319c1011464a458f73c56a1bde2fe2d94b4d95c511ea6a6201ab7c4eedded4a435_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "c6ed2b85-7427-382e-9aad-986cc740d5d2",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "file object opened without corresponding close"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mii/server.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 290,
+                  "startColumn": 17,
+                  "endLine": 290,
+                  "endColumn": 69,
+                  "snippet": {
+                    "text": "                hostfile = tempfile.NamedTemporaryFile(delete=False)"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "830ade6305ba09da92e398e66366f503833de45df5f6930198c56a2aebe3c0b00bdd7bd3e34da9864d7c8708c460d302e6e8111a761de7d0503893b786a747b7_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "5df491de-722d-37a8-9aa2-759970b991bc",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Using 'hostfile.name' without '.flush()' or '.close()' may cause an error because the file may not exist when 'hostfile.name' is used. Use '.flush()' or close the file before using 'hostfile.name'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mii/server.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 301,
+                  "startColumn": 25,
+                  "endLine": 301,
+                  "endColumn": 38,
+                  "snippet": {
+                    "text": "                        hostfile.name,"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "02ed46ea02879f35a734350a6f62217e9c05787d9fb1f909923c83a9dd2accba65283ee748c5564095c16a60da949dc298c2cc2731019165e6e63dcef2dc902e_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "0ead1b02-aadc-3abc-871e-73785bc8c548",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "The Python 'subprocess' module called with 'shell=True' may allow for shell injection"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "setup.py",
+                  "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
                   "startLine": 37,
@@ -298,23 +1991,16 @@
                   "endLine": 37,
                   "endColumn": 69,
                   "snippet": {
-                    "text": "        result = subprocess.check_output(git_branch_cmd, shell=True)\n"
-                  }
-                },
-                "contextRegion": {
-                  "startLine": 36,
-                  "endLine": 38,
-                  "snippet": {
-                    "text": "        git_hash = result.decode('utf-8').strip()\n        result = subprocess.check_output(git_branch_cmd, shell=True)\n        git_branch = result.decode('utf-8').strip()\n"
+                    "text": "        result = subprocess.check_output(git_branch_cmd, shell=True)"
                   }
                 }
               }
             }
           ],
-          "properties": {
-            "issue_severity": "HIGH",
-            "issue_confidence": "HIGH"
-          }
+          "fingerprints": {
+            "matchBasedId/v1": "f5e971709f9442762ccfc2606601feb2c1979fccb9deb3cf64fcee70fde4f993cb8856832871ecfe450c77b6c2d1602b6994e60653b2b0b271dee4fcdb1fcf94_1"
+          },
+          "properties": {}
         }
       ],
       "newlineSequences": [
